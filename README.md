@@ -18,7 +18,7 @@ pub fn main() -> Nil {
   // -> #("1. Bread", "\n", "2. Milk")
 
   splitter.split(line_ends, "No end of line here!")
-  // -> #("", "", "No end of line here!")
+  // -> #("No end of line here!", "", "")
 }
 ```
 

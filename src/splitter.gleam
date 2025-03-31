@@ -29,7 +29,7 @@ pub fn new(substrings: List(String)) -> Splitter {
 /// 2. The substring the string was split with.
 /// 3. The string suffix after the split.
 ///
-/// If no substring was found then strings 1 and 2 will be empty, and string 3
+/// If no substring was found then strings 2 and 3 will be empty, and string 1
 /// will be the whole input string.
 ///
 /// # Examples
@@ -41,7 +41,7 @@ pub fn new(substrings: List(String)) -> Splitter {
 /// // -> #("1. Bread", "\n", "2. Milk")
 ///
 /// splitter.split(line_ends, "No end of line here!")
-/// // -> #("", "", "No end of line here!")
+/// // -> #("No end of line here!", "", "")
 /// ```
 ///
 @external(erlang, "splitter_ffi", "split")
