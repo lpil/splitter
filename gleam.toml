@@ -1,6 +1,6 @@
 name = "splitter"
 version = "1.0.0"
-decription = "Efficiently slice prefixes from strings. Good for parsers!"
+description = "Efficiently slice prefixes from strings. Good for parsers!"
 licences = ["Apache-2.0"]
 repository = { type = "github", user = "lpil", repo = "splitter" }
 links = [
