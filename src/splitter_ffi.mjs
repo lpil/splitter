@@ -24,6 +24,16 @@ export function split(splitter, string) {
   ];
 }
 
+export function split_in_two(splitter, string) {
+  const match = string.match(splitter);
+
+  if (!match) return [string, ""]; // No delimiter found
+
+  const index = match.index;
+
+  return [string.slice(0, index), string.slice(index)];
+}
+
 function escapeRegExp(string) {
   return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }

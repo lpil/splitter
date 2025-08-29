@@ -38,7 +38,7 @@ pub fn new(substrings: List(String)) -> Splitter {
 /// let line_ends = splitter.new(["\n", "\r\n"])
 ///
 /// splitter.split(line_ends, "1. Bread\n2. Milk\n")
-/// // -> #("1. Bread", "\n", "2. Milk")
+/// // -> #("1. Bread", "\n", "2. Milk\n")
 ///
 /// splitter.split(line_ends, "No end of line here!")
 /// // -> #("No end of line here!", "", "")
@@ -48,6 +48,38 @@ pub fn new(substrings: List(String)) -> Splitter {
 @external(javascript, "./splitter_ffi.mjs", "split")
 pub fn split(splitter: Splitter, string: String) -> #(String, String, String)
 
+/// Use the splitter to find the first substring in the input string, splitting
+/// the input string at that point.
+///
+/// A tuple of two strings is returned:
+/// 1. The string prefix before the split.
+/// 3. The string suffix after and including the split.
+///
+/// If no substring was found then the suffix will be empty, and the prefix
+/// will be the whole input string.
+///
+/// # Examples
+///
+/// ```gleam
+/// let line_ends = splitter.new(["\n", "\r\n"])
+///
+/// splitter.split(line_ends, "1. Bread\n2. Milk\n")
+/// // -> #("1. Bread", "\n2. Milk\n")
+///
+/// splitter.split(line_ends, "No end of line here!")
+/// // -> #("No end of line here!", "")
+/// ```
+///
+@external(erlang, "splitter_ffi", "split_in_two")
+@external(javascript, "./splitter_ffi.mjs", "split_in_two")
+pub fn split_in_two(splitter: Splitter, string: String) -> #(String, String)
+
 @external(erlang, "splitter_ffi", "new")
 @external(javascript, "./splitter_ffi.mjs", "make")
 fn make(patterns: List(String)) -> Splitter
+
+pub fn main() {
+  let splitter = new(["\n", "\r\n"])
+
+  echo split_in_two(splitter, "1. Bread\n2. Milk\n")
+}
