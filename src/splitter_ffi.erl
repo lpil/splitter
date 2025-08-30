@@ -1,5 +1,5 @@
 -module(splitter_ffi).
--export([new/1, split/2, split_in_two/2]).
+-export([new/1, split/2, split_before/2, split_after/2]).
 
 new([]) ->
     empty_splitter;
@@ -17,12 +17,23 @@ split(Splitter, String) ->
              binary:part(String, Index + Length, byte_size(String) - Index - Length)}
     end.
 
-split_in_two(empty_splitter, String) ->
+split_before(empty_splitter, String) ->
     {<<>>, String};
-split_in_two(Splitter, String) ->
+split_before(Splitter, String) ->
     case binary:match(String, Splitter) of
         nomatch -> {String, <<"">>};  % No delimiter found
         {Index, _Length} ->
             {binary:part(String, 0, Index),
              binary:part(String, Index, byte_size(String) - Index)}
+    end.
+
+split_after(empty_splitter, String) ->
+    {<<>>, String};
+split_after(Splitter, String) ->
+    case binary:match(String, Splitter) of
+        nomatch -> {String, <<"">>};  % No delimiter found
+        {Index, Length} ->
+            SplitPoint = Index + Length,
+            {binary:part(String, 0, SplitPoint),
+             binary:part(String, SplitPoint, byte_size(String) - SplitPoint)}
     end.

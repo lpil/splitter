@@ -24,14 +24,22 @@ export function split(splitter, string) {
   ];
 }
 
-export function split_in_two(splitter, string) {
+export function split_before(splitter, string) {
   const match = string.match(splitter);
 
   if (!match) return [string, ""]; // No delimiter found
 
-  const index = match.index;
+  const split_point = match.index;
+  return [string.slice(0, split_point), string.slice(split_point)];
+}
 
-  return [string.slice(0, index), string.slice(index)];
+export function split_after(splitter, string) {
+  const match = string.match(splitter);
+
+  if (!match) return [string, ""]; // No delimiter found
+
+  const split_point = match.index + match[0].length;
+  return [string.slice(0, split_point), string.slice(split_point)];
 }
 
 function escapeRegExp(string) {
