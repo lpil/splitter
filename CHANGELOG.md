@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## v1.1.0 - 2025-08-30
 
 - Added new `split_before` and `split_after` functions.
 
