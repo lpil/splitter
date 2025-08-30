@@ -21,7 +21,7 @@ split_in_two(empty_splitter, String) ->
     {<<>>, String};
 split_in_two(Splitter, String) ->
     case binary:match(String, Splitter) of
-        nomatch -> {String, <<"">>, <<"">>};  % No delimiter found
+        nomatch -> {String, <<"">>};  % No delimiter found
         {Index, _Length} ->
             {binary:part(String, 0, Index),
              binary:part(String, Index, byte_size(String) - Index)}
