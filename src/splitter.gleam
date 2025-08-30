@@ -49,11 +49,11 @@ pub fn new(substrings: List(String)) -> Splitter {
 pub fn split(splitter: Splitter, string: String) -> #(String, String, String)
 
 /// Use the splitter to find the first substring in the input string, splitting
-/// the input string at that point.
+/// the input string before that point.
 ///
 /// A tuple of two strings is returned:
-/// 1. The string prefix before the split.
-/// 3. The string suffix after and including the split.
+/// 1. The string prefix before the matched substring.
+/// 2. The matched substring and the suffix after.
 ///
 /// If no substring was found then the suffix will be empty, and the prefix
 /// will be the whole input string.
@@ -63,16 +63,42 @@ pub fn split(splitter: Splitter, string: String) -> #(String, String, String)
 /// ```gleam
 /// let line_ends = splitter.new(["\n", "\r\n"])
 ///
-/// splitter.split(line_ends, "1. Bread\n2. Milk\n")
+/// splitter.split_before(line_ends, "1. Bread\n2. Milk\n")
 /// // -> #("1. Bread", "\n2. Milk\n")
 ///
-/// splitter.split(line_ends, "No end of line here!")
+/// splitter.split_before(line_ends, "No end of line here!")
 /// // -> #("No end of line here!", "")
 /// ```
 ///
-@external(erlang, "splitter_ffi", "split_in_two")
-@external(javascript, "./splitter_ffi.mjs", "split_in_two")
-pub fn split_in_two(splitter: Splitter, string: String) -> #(String, String)
+@external(erlang, "splitter_ffi", "split_before")
+@external(javascript, "./splitter_ffi.mjs", "split_before")
+pub fn split_before(splitter: Splitter, string: String) -> #(String, String)
+
+/// Use the splitter to find the first substring in the input string, splitting
+/// the input string after that point.
+///
+/// A tuple of two strings is returned:
+/// 1. The string prefix before and including the matched substring.
+/// 2. The suffix after the matched substring.
+///
+/// If no substring was found then the suffix will be empty, and the prefix
+/// will be the whole input string.
+///
+/// # Examples
+///
+/// ```gleam
+/// let line_ends = splitter.new(["\n", "\r\n"])
+///
+/// splitter.split_after(line_ends, "1. Bread\n2. Milk\n")
+/// // -> #("1. Bread\n", "2. Milk\n")
+///
+/// splitter.split_after(line_ends, "No end of line here!")
+/// // -> #("No end of line here!", "")
+/// ```
+///
+@external(erlang, "splitter_ffi", "split_after")
+@external(javascript, "./splitter_ffi.mjs", "split_after")
+pub fn split_after(splitter: Splitter, string: String) -> #(String, String)
 
 @external(erlang, "splitter_ffi", "new")
 @external(javascript, "./splitter_ffi.mjs", "make")
