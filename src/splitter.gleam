@@ -77,9 +77,3 @@ pub fn split_in_two(splitter: Splitter, string: String) -> #(String, String)
 @external(erlang, "splitter_ffi", "new")
 @external(javascript, "./splitter_ffi.mjs", "make")
 fn make(patterns: List(String)) -> Splitter
-
-pub fn main() {
-  let splitter = new(["\n", "\r\n"])
-
-  echo split_in_two(splitter, "1. Bread\n2. Milk\n")
-}
