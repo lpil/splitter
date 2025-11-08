@@ -42,6 +42,11 @@ export function split_after(splitter, string) {
   return [string.slice(0, split_point), string.slice(split_point)];
 }
 
+export function would_split(splitter, string) {
+  if (splitter.source === "(?:)") return false
+  return splitter.test(string)
+}
+
 function escapeRegExp(string) {
   return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
