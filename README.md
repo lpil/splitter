@@ -14,8 +14,8 @@ import splitter
 pub fn main() -> Nil {
   let line_ends = splitter.new(["\n", "\r\n"])
 
-  splitter.split(line_ends, "1. Bread\n2. Milk\n")
-  // -> #("1. Bread", "\n", "2. Milk")
+  splitter.split(line_ends, "1. Bread\n2. Milk\n3. Eggs\n")
+  // -> #("1. Bread", "\n", "2. Milk\n3. Eggs\n")
 
   splitter.split(line_ends, "No end of line here!")
   // -> #("No end of line here!", "", "")
