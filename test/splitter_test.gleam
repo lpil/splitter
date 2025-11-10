@@ -1,3 +1,4 @@
+import gleam/bool
 import gleeunit
 import gleeunit/should
 import splitter
@@ -160,4 +161,58 @@ pub fn split_after_7_test() {
   splitter.new(["", "ab", "", "a", ""])
   |> splitter.split_after("22ab11")
   |> should.equal(#("22ab", "11"))
+}
+
+pub fn would_split_0_test() {
+  assert splitter.new(["a", "b"])
+    |> splitter.would_split("111a222")
+}
+
+pub fn would_split_1_test() {
+  assert splitter.new(["a", "b"])
+    |> splitter.would_split("111b222")
+}
+
+pub fn would_split_2_test() {
+  assert splitter.new(["a", "b"])
+    |> splitter.would_split("111a222b333")
+}
+
+pub fn would_split_3_test() {
+  assert splitter.new(["a", "b"])
+    |> splitter.would_split("111a222b333")
+}
+
+pub fn would_split_4_test() {
+  assert splitter.new(["a", "b"])
+    |> splitter.would_split("a222b333")
+}
+
+pub fn would_split_5_test() {
+  assert splitter.new(["ab", "a"])
+    |> splitter.would_split("ab11")
+}
+
+pub fn would_split_6_test() {
+  assert splitter.new([])
+    |> splitter.would_split("ab11")
+    |> bool.negate
+}
+
+pub fn would_split_7_test() {
+  assert splitter.new(["", "ab", "", "a", ""])
+    |> splitter.would_split("22ab11")
+}
+
+// no matching patterns
+pub fn would_split_8_test() {
+  assert splitter.new(["c", "3"])
+    |> splitter.would_split("11ab22ba")
+    |> bool.negate
+}
+
+// right at the end
+pub fn would_split_9_test() {
+  assert splitter.new(["b"])
+    |> splitter.would_split("11aa21ab")
 }
