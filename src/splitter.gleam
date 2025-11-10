@@ -100,28 +100,6 @@ pub fn split_before(splitter: Splitter, string: String) -> #(String, String)
 @external(javascript, "./splitter_ffi.mjs", "split_after")
 pub fn split_after(splitter: Splitter, string: String) -> #(String, String)
 
-/// Use the splitter to check whether any of the substrings are contained
-/// in the input string, without splitting the input string.
-///
-/// Returns a boolean value indicating whether a match was found in the input
-/// string.
-///
-/// # Examples
-///
-/// ```gleam
-/// let line_ends = splitter.new(["\n", "\r\n"])
-///
-/// splitter.would_split(line_ends, "1. Bread\n2. Milk\n")
-/// // -> True
-///
-/// splitter.would_split(line_ends, "No end of line here!")
-/// // -> False
-/// ```
-/// 
-@external(erlang, "splitter_ffi", "would_split")
-@external(javascript, "./splitter_ffi.mjs", "would_split")
-pub fn would_split(splitter: Splitter, string: String) -> Bool
-
 @external(erlang, "splitter_ffi", "new")
 @external(javascript, "./splitter_ffi.mjs", "make")
 fn make(patterns: List(String)) -> Splitter
