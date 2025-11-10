@@ -43,6 +43,9 @@ export function split_after(splitter, string) {
 }
 
 export function would_split(splitter, string) {
+  // According to https://tc39.es/ecma262/#sec-escaperegexppattern
+  // RegExp.source must escape "" as "(?:)"
+  // i.e. this checks for the empty splitter
   if (splitter.source === "(?:)") return false
   return splitter.test(string)
 }
