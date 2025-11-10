@@ -1,3 +1,4 @@
+import gleam/bool
 import gleeunit
 import gleeunit/should
 import splitter
@@ -163,63 +164,55 @@ pub fn split_after_7_test() {
 }
 
 pub fn would_split_0_test() {
-  splitter.new(["a", "b"])
-  |> splitter.would_split("111a222")
-  |> should.equal(True)
+  assert splitter.new(["a", "b"])
+    |> splitter.would_split("111a222")
 }
 
 pub fn would_split_1_test() {
-  splitter.new(["a", "b"])
-  |> splitter.would_split("111b222")
-  |> should.equal(True)
+  assert splitter.new(["a", "b"])
+    |> splitter.would_split("111b222")
 }
 
 pub fn would_split_2_test() {
-  splitter.new(["a", "b"])
-  |> splitter.would_split("111a222b333")
-  |> should.equal(True)
+  assert splitter.new(["a", "b"])
+    |> splitter.would_split("111a222b333")
 }
 
 pub fn would_split_3_test() {
-  splitter.new(["a", "b"])
-  |> splitter.would_split("111a222b333")
-  |> should.equal(True)
+  assert splitter.new(["a", "b"])
+    |> splitter.would_split("111a222b333")
 }
 
 pub fn would_split_4_test() {
-  splitter.new(["a", "b"])
-  |> splitter.would_split("a222b333")
-  |> should.equal(True)
+  assert splitter.new(["a", "b"])
+    |> splitter.would_split("a222b333")
 }
 
 pub fn would_split_5_test() {
-  splitter.new(["ab", "a"])
-  |> splitter.would_split("ab11")
-  |> should.equal(True)
+  assert splitter.new(["ab", "a"])
+    |> splitter.would_split("ab11")
 }
 
 pub fn would_split_6_test() {
-  splitter.new([])
-  |> splitter.would_split("ab11")
-  |> should.equal(False)
+  assert splitter.new([])
+    |> splitter.would_split("ab11")
+    |> bool.negate
 }
 
 pub fn would_split_7_test() {
-  splitter.new(["", "ab", "", "a", ""])
-  |> splitter.would_split("22ab11")
-  |> should.equal(True)
+  assert splitter.new(["", "ab", "", "a", ""])
+    |> splitter.would_split("22ab11")
 }
 
 // no matching patterns
 pub fn would_split_8_test() {
-  splitter.new(["c", "3"])
-  |> splitter.would_split("11ab22ba")
-  |> should.equal(False)
+  assert splitter.new(["c", "3"])
+    |> splitter.would_split("11ab22ba")
+    |> bool.negate
 }
 
 // right at the end
 pub fn would_split_9_test() {
-  splitter.new(["b"])
-  |> splitter.would_split("11aa21ab")
-  |> should.equal(True)
+  assert splitter.new(["b"])
+    |> splitter.would_split("11aa21ab")
 }
