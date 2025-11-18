@@ -1,6 +1,6 @@
 # Changelog
 
-## UNRELEASED - 2025-11-18
+## v1.2.0 - 2025-11-18
 
 - Added new `would_split` function.
 
