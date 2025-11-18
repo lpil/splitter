@@ -1,4 +1,3 @@
-import gleam/bool
 import gleeunit
 import gleeunit/should
 import splitter
@@ -194,9 +193,8 @@ pub fn would_split_5_test() {
 }
 
 pub fn would_split_6_test() {
-  assert splitter.new([])
-    |> splitter.would_split("ab11")
-    |> bool.negate
+  let splitter = splitter.new([])
+  assert !splitter.would_split(splitter, "ab11")
 }
 
 pub fn would_split_7_test() {
@@ -204,14 +202,13 @@ pub fn would_split_7_test() {
     |> splitter.would_split("22ab11")
 }
 
-// no matching patterns
+// No matching patterns
 pub fn would_split_8_test() {
-  assert splitter.new(["c", "3"])
-    |> splitter.would_split("11ab22ba")
-    |> bool.negate
+  let splitter = splitter.new(["c", "3"])
+  assert !splitter.would_split(splitter, "11ab22ba")
 }
 
-// right at the end
+// Right at the end
 pub fn would_split_9_test() {
   assert splitter.new(["b"])
     |> splitter.would_split("11aa21ab")
