@@ -103,7 +103,7 @@ pub fn split_after(splitter: Splitter, string: String) -> #(String, String)
 /// Use the splitter to check whether any of the substrings are contained
 /// in the input string, without splitting the input string.
 ///
-/// Returns a boolean value indicating whether a match was found in the input
+/// Returns a bool value indicating whether a match was found in the input
 /// string.
 ///
 /// # Examples
