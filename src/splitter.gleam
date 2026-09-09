@@ -125,3 +125,7 @@ pub fn would_split(splitter: Splitter, string: String) -> Bool
 @external(erlang, "splitter_ffi", "new")
 @external(javascript, "./splitter_ffi.mjs", "make")
 fn make(patterns: List(String)) -> Splitter
+
+@external(erlang, "splitter_ffi", "split_all")
+@external(javascript, "./splitter_ffi.mjs", "split_all")
+pub fn split_all(splitter: Splitter, string: String) -> List(String)

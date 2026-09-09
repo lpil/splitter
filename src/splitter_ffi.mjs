@@ -1,10 +1,18 @@
+import {
+  List$Empty,
+  List$NonEmpty,
+  List$isNonEmpty,
+  List$NonEmpty$first,
+  List$NonEmpty$rest,
+} from "./gleam.mjs";
+
 export function make(patterns) {
   let pattern = "";
   let cursor = patterns;
-  while (cursor.tail) {
+  while (List$isNonEmpty(cursor)) {
     if (pattern !== "") pattern += "|";
-    pattern += escapeRegExp(cursor.head);
-    cursor = cursor.tail;
+    pattern += escapeRegExp(List$NonEmpty$first(cursor));
+    cursor = List$NonEmpty$rest(cursor);
   }
   return new RegExp(pattern);
 }
@@ -52,4 +60,14 @@ export function would_split(splitter, string) {
 
 function escapeRegExp(string) {
   return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+export function split_all(splitter, string) {
+  let list = List$Empty();
+  if (splitter.source === "(?:)") return List$NonEmpty(string, list);
+  const parts = string.split(splitter);
+  while (parts.length) {
+    list = List$NonEmpty(parts.pop(), list);
+  }
+  return list;
 }

@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.3.0 - 2026-09-09
+
+- Added new `split_all` function.
+
 ## v1.2.0 - 2025-11-18
 
 - Added new `would_split` function.

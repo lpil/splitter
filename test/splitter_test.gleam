@@ -213,3 +213,12 @@ pub fn would_split_9_test() {
   assert splitter.new(["b"])
     |> splitter.would_split("11aa21ab")
 }
+
+pub fn split_all_0_test() {
+  assert splitter.new([]) |> splitter.split_all("hello") == ["hello"]
+}
+
+pub fn split_all_1_test() {
+  assert splitter.new(["a", "b"]) |> splitter.split_all("oaooboobbooao")
+    == ["o", "oo", "oo", "", "oo", "o"]
+}

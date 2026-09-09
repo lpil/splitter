@@ -1,5 +1,7 @@
 -module(splitter_ffi).
--export([new/1, split/2, split_before/2, split_after/2, would_split/2]).
+-export([
+    new/1, split/2, split_before/2, split_after/2, would_split/2, split_all/2
+]).
 
 new([]) ->
     empty_splitter;
@@ -42,3 +44,8 @@ would_split(empty_splitter, _String) ->
     false;
 would_split(Splitter, String) ->
     binary:match(String, Splitter) =/= nomatch.
+
+split_all(empty_splitter, String) ->
+    [String];
+split_all(Splitter, String) ->
+    binary:split(String, Splitter, [global]).
